@@ -1,22 +1,25 @@
 <header>
-  <nav></nav>
+  <nav>
+    <ul>
+        <li><a href="/">투표목록으로</a></li>
+        <li><a href="/logout">로그아웃</a></li>
+    </ul>
+  </nav>
 </header>
 <div>
-  <form>
+  <form action="/voting/new" method="post">
     <div>
       <label>제목
-        <input type="text" required minlength="2" maxlength="20" />
+        <input type="text" required name="voteName" minlength="2" maxlength="20" />
       </label>
     </div>
-    <div>
-      <label>선택사항
-        <input type="text" required />
-        <button>항목 추가</button>
-      </label>
+    <div class="itemBox">
+    <input type="text" required name="voteItems"/>
+    <input type="button" value="추가" onclick="addItem()" />
     </div>
     <div>
       <label>투표만료날짜
-        <input type="datetime-local" required />
+        <input type="datetime-local" required name="expireTime" />
       </label>
     </div>
     <div>
