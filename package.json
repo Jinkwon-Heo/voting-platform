@@ -1,0 +1,27 @@
+{
+  "name": "voting-platform",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "NODE_ENV=development nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^3.2.0",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.17.3",
+    "http-errors": "~1.6.3",
+    "mongoose": "^6.3.3",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
