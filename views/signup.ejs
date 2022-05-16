@@ -1,23 +1,23 @@
 <div>
-  <form>
+  <form action="/signup" method="post">
     <div>
     <label>이메일
-      <input type="email" required />
+      <input type="email" name="email" required />
     </label>
     </div>
     <div>
     <label>이름
-      <input type="text" required />
+      <input type="text" name="username" required />
     </label>
     </div>
     <div>
     <label>비밀번호
-      <input type="password" required minlength="8" />
+      <input type="password" name="password" required minlength="8" />
     </label>
     </div>
     <div>
     <label>비밀번호 확인
-      <input type="password" required minlength="8" />
+      <input type="password" name="password2" required minlength="8" />
     </label>
     </div>
     <div>
