@@ -3,7 +3,7 @@
   <nav>
     <ul>
       <% if (loggedUserEmail === voteData.voteCreator.email) { %>
-       <li><a href="#" onclick="javascript:deleteVote(`/voting/<%= voteId %>/delete`)">투표삭제 </a></li>
+       <li><a href="#" onclick="javascript:deleteVote(`/voting/<%= voteData._id %>/delete`)">투표삭제 </a></li>
       <% } %>
       <li><a href="/">투표목록으로</a></li>
       <li><a href="#" onclick="javascript:logoutControl('/logout')">로그아웃</a></li>
@@ -13,12 +13,16 @@
 </header>
 <div>
   <% if (isVoteOpened) { %>
-    <form>
-      <!-- 여기에 for문으로 선택사항들 출력하자. -->
-      <label>선택사항 이름
-        <input type="radio" name="vote1">
-      </label>
-      <button type="submit">제출</button>
+    <form action="/voting/<%= voteId %>/voted" method="post">
+      <% for( let i = 0; i < voteData.voteItems.length; i++ ) { %>
+        <label><%= voteData.voteItems[i].item %>:
+          <input type="radio" name="voteItem" value="<%= voteData.voteItems[i].item %>">
+          <% if (loggedInUserEmail === voteData.voteCreator.email) { %>
+            투표된 횟수: <%= voteData.voteItems[i].voted %>
+          <% } %>
+        </label><br>
+      <% } %>
+      <button type="submit" onclick="getCheckedItem(event)">제출</button>
     </form>
   <% } else { %>
     <% for( let i = 0; i < voteData.voteItems.length; i++ ) { %>
@@ -30,4 +34,5 @@
       </div>
     <% } %>
   <% } %>
+  <h1 id="result"></h1>
 </div>

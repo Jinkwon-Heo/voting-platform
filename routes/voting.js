@@ -8,5 +8,6 @@ router.post('/new', isAuthenticated, votingControllers.createVote);
 router.get('/success', isAuthenticated, votingControllers.showSuccessPage);
 router.get('/:vote_id', votingControllers.showVotePage);
 router.post('/:vote_id/delete', isAuthenticated, votingControllers.deleteVote);
+router.post('/:vote_id/voted', isAuthenticated, votingControllers.submitVote);
 
 module.exports = router;

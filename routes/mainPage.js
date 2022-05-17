@@ -4,6 +4,6 @@ const isAuthenticated = require('../middlewares/loginAuth');
 const mainPageControllers = require('./controllers/mainPage.controllers');
 
 /* GET home page. */
-router.get('/', isAuthenticated, mainPageControllers.showMainPage);
+router.get('/', mainPageControllers.showMainPage);
 
 module.exports = router;

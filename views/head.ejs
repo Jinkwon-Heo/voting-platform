@@ -5,8 +5,6 @@
     function logoutControl(url) {
       const form = document.createElement('form');
 
-      console.log(url);
-
       form.action = url;
       form.method = 'post';
       document.body.appendChild(form);
@@ -15,7 +13,6 @@
 
     function deleteVote(url) {
       const form = document.createElement('form');
-      console.log(url);
 
       form.action = url;
       form.method = 'post';

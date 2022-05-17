@@ -44,20 +44,41 @@ exports.createVote = async (req, res, next) => {
 }
 
 exports.showVotePage = async (req, res, next) => {
+  //로그인 하지 않은 유저가 들어올 시에 화면 보여주는 로직 짜기.
   const id = req.params.vote_id;
+  const loggedInUserEmail = req.user.email;
   const voteData = await Vote.findById(id).populate('voteCreator');
   const presentTime = transformTimeFormat(new Date());
   const isVoteOpened = presentTime < voteData.expireTime;
-  const voteId = voteData._id;
-  console.log(voteId)
 
-  res.render('votePage', { voteData, isVoteOpened, loggedUserEmail: req.user.email, voteId });
+  res.render('votePage',{
+    voteData,
+    isVoteOpened,
+    loggedUserEmail: req.user.email,
+    voteId: id,
+    loggedInUserEmail,
+  });
 }
 
 exports.deleteVote = async (req, res, next) => {
   const id = req.params.vote_id;
-  console.log("+++++++++++++++++++++++");
   await Vote.findByIdAndDelete(id);
 
+  res.redirect('/');
+}
+
+exports.submitVote = async (req, res, next) => {
+  const voteId = req.params.vote_id;
+  const optionName = req.body.voteItem;
+  const voteData = await Vote.findById(voteId);
+
+  for (let i = 0; i < voteData.voteItems.length; i++) {
+    if (voteData.voteItems[i].item === optionName) {
+      voteData.voteItems[i].voted++;
+      break;
+    }
+  }
+
+  await Vote.findByIdAndUpdate(voteId, voteData);
   res.redirect('/');
 }
