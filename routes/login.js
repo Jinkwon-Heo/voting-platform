@@ -9,5 +9,8 @@ router.post('/', passport.authenticate('local', {
   failureRedirect: '/login',
   successRedirect: '/',
 }));
+router.post('/callback', passport.authenticate('local',
+  { failureRedirect: '/login' }),
+  loginController.callbackLoginSuccess);
 
 module.exports = router;

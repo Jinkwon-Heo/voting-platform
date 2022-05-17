@@ -4,11 +4,11 @@ const transformTimeFormat = require('../../util/transformTimeFormat');
 
 exports.showCreateVote = async (req, res, next) => {
   res.render('createVote', { error: null });
-}
+};
 
 exports.showSuccessPage = (req, res, next) => {
   res.render('success');
-}
+};
 
 exports.createVote = async (req, res, next) => {
   try {
@@ -32,7 +32,7 @@ exports.createVote = async (req, res, next) => {
     }
 
     const userData = await User.findOne({ email: loggedInUserEmail });
-    req.body.voteCreator = userData._id
+    req.body.voteCreator = userData._id;
     req.body.voteItems = objectedItems;
     req.body.expireTime = transformTimeFormat(req.body.expireTime);
     const newVote = Vote(req.body);
@@ -41,10 +41,15 @@ exports.createVote = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 exports.showVotePage = async (req, res, next) => {
-  //로그인 하지 않은 유저가 들어올 시에 화면 보여주는 로직 짜기.
+  if (!req.user) {
+    req.session.callbackUrl = req.originalUrl;
+
+    return res.render('callbackLogin', { callbackUrl: req.originalUrl });
+  }
+
   const id = req.params.vote_id;
   const loggedInUserEmail = req.user.email;
   const voteData = await Vote.findById(id).populate('voteCreator');
@@ -58,14 +63,13 @@ exports.showVotePage = async (req, res, next) => {
     voteId: id,
     loggedInUserEmail,
   });
-}
+};
 
 exports.deleteVote = async (req, res, next) => {
   const id = req.params.vote_id;
   await Vote.findByIdAndDelete(id);
-
   res.redirect('/');
-}
+};
 
 exports.submitVote = async (req, res, next) => {
   const voteId = req.params.vote_id;
@@ -81,4 +85,4 @@ exports.submitVote = async (req, res, next) => {
 
   await Vote.findByIdAndUpdate(voteId, voteData);
   res.redirect('/');
-}
+};
