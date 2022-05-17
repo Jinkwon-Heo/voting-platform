@@ -2,6 +2,17 @@ const User = require('../../models/User');
 const Vote = require('../../models/Vote');
 
 exports.showCreateVote = async (req, res, next) => {
+  const loggedInUserEmail = req.session.passport.user;
+  const userData = await User.findOne({ email: loggedInUserEmail });
+  const populatedData = await Vote.find().populate('voteCreator');
+
+  const filteredData = populatedData.filter((data) => {
+    if (data.voteCreator.email === userData.email) {
+      return true;
+    }
+  });
+
+  console.log(filteredData);
   res.render('createVote');
 }
 
@@ -21,7 +32,7 @@ exports.createVote = async (req, res, next) => {
       objectedItems.push(objectedItem);
     }
 
-    const userData = await User.findOne({ loggedInUserEmail });
+    const userData = await User.findOne({ email: loggedInUserEmail });
     req.body.voteCreator = userData._id
     req.body.voteItems = objectedItems;
     const newVote = Vote(req.body);

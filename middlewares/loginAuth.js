@@ -1,18 +1,9 @@
-const onlyNotLoggedInCanView = (req, res, next) => {
+const isAuthenticated = (req, res, next) => {
   if (req.user) {
-    res.redirect('/login');
-  } else {
     next();
+  } else {
+    res.status(301).redirect("/login");
   }
 };
 
-const onlyLoggedInCanView = (req, res, next) => {
-  if (!req.user) {
-    res.redirect('/login');
-  } else {
-    next();
-  }
-};
-
-module.exports = onlyLoggedInCanView;
-module.exports = onlyNotLoggedInCanView;
+module.exports = isAuthenticated;

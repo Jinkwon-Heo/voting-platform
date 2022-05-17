@@ -1,7 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const logoutControllers = require("./controllers/logout.controllers");
+const logoutControllers = require('./controllers/logout.controllers');
+const onlyLoggedInCanView = require('../middlewares/loginAuth');
 
-router.get("/", logoutControllers.logout);
+router.post('/', onlyLoggedInCanView, logoutControllers.logout);
 
 module.exports = router;
