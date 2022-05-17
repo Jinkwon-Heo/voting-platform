@@ -1,12 +1,24 @@
 <head>
-  <script defer src="/javascripts/addVoteItem.js"></script>
+  <script defer src='/javascripts/addVoteItem.js'></script>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <script>
     function logoutControl(url) {
       const form = document.createElement('form');
 
+      console.log(url);
+
       form.action = url;
-      form.method = "post";
+      form.method = 'post';
+      document.body.appendChild(form);
+      form.submit();
+    }
+
+    function deleteVote(url) {
+      const form = document.createElement('form');
+      console.log(url);
+
+      form.action = url;
+      form.method = 'post';
       document.body.appendChild(form);
       form.submit();
     }

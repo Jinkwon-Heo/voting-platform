@@ -1,6 +1,11 @@
 <div>
   <form action="/signup" method="post">
     <div>
+      <% if (error) { %>
+        <span><%= error %> </span>
+      <% } %>
+    </div>
+    <div>
     <label>이메일
       <input type="email" name="email" required />
     </label>

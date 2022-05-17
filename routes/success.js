@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const successController = require('./controllers/success.controller');
-const onlyLoggedInCanView = require('../middlewares/loginAuth');
+const isAuthenticated = require('../middlewares/loginAuth');
 
-router.get('/', onlyLoggedInCanView, successController.showSuccessPage);
+router.get('/', isAuthenticated, successController.showSuccessPage);
 
 module.exports = router;

@@ -29,6 +29,7 @@ app.set('layout extractScripts', true);
 
 app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, "/public")));
+app.use('/util', express.static(path.join(__dirname, './util')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(flash());

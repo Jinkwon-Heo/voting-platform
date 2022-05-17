@@ -1,19 +1,9 @@
 const User = require('../../models/User');
 const Vote = require('../../models/Vote');
+const transformTimeFormat = require('../../util/transformTimeFormat');
 
 exports.showCreateVote = async (req, res, next) => {
-  const loggedInUserEmail = req.session.passport.user;
-  const userData = await User.findOne({ email: loggedInUserEmail });
-  const populatedData = await Vote.find().populate('voteCreator');
-
-  const filteredData = populatedData.filter((data) => {
-    if (data.voteCreator.email === userData.email) {
-      return true;
-    }
-  });
-
-  console.log(filteredData);
-  res.render('createVote');
+  res.render('createVote', { error: null });
 }
 
 exports.showSuccessPage = (req, res, next) => {
@@ -22,6 +12,15 @@ exports.showSuccessPage = (req, res, next) => {
 
 exports.createVote = async (req, res, next) => {
   try {
+    const presentTime = transformTimeFormat(new Date());
+
+    if (presentTime > req.body.expireTime) {
+      req.flash('error', '현재 시간보다 이전의 날짜는 선택할 수 없습니다.');
+      res.status(400);
+
+      return res.render('createVote', { error: req.flash('error') });
+    }
+
     const loggedInUserEmail = req.session.passport.user;
     const items = req.body.voteItems;
     const objectedItems = [];
@@ -35,10 +34,30 @@ exports.createVote = async (req, res, next) => {
     const userData = await User.findOne({ email: loggedInUserEmail });
     req.body.voteCreator = userData._id
     req.body.voteItems = objectedItems;
+    req.body.expireTime = transformTimeFormat(req.body.expireTime);
     const newVote = Vote(req.body);
     await newVote.save();
     res.render('success');
   } catch (error) {
     next(error);
   }
+}
+
+exports.showVotePage = async (req, res, next) => {
+  const id = req.params.vote_id;
+  const voteData = await Vote.findById(id).populate('voteCreator');
+  const presentTime = transformTimeFormat(new Date());
+  const isVoteOpened = presentTime < voteData.expireTime;
+  const voteId = voteData._id;
+  console.log(voteId)
+
+  res.render('votePage', { voteData, isVoteOpened, loggedUserEmail: req.user.email, voteId });
+}
+
+exports.deleteVote = async (req, res, next) => {
+  const id = req.params.vote_id;
+  console.log("+++++++++++++++++++++++");
+  await Vote.findByIdAndDelete(id);
+
+  res.redirect('/');
 }

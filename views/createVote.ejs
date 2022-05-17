@@ -2,16 +2,20 @@
   <nav>
     <ul>
         <li><a href="/">투표목록으로</a></li>
-        <!-- <li><a href="/logout">로그아웃</a></li> -->
         <li><a href="#" onclick="javascript:logoutControl('/logout')">로그아웃</a></li>
     </ul>
   </nav>
 </header>
 <div>
+  <% if (error) { %>
+    <span><%= error %> </span>
+  <% } %>
+</div>
+<div>
   <form action="/voting/new" method="post">
     <div>
       <label>제목
-        <input type="text" required name="voteName" minlength="2" maxlength="20" />
+        <input type="text" required name="voteName" minlength="2" maxlength="20" autofocus />
       </label>
     </div>
     <div class="itemBox">

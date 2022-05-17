@@ -1,19 +1,33 @@
 <header>
-  <h3>투표제목</h3>
-  <!-- 생성자가 이 페이지로 들어온다면 삭제버튼 보이도록 작성 -->
-  <nav></nav>
-  <span>생성자 이름</span>
+  <h1><%= voteData.voteName %> </h1>
+  <nav>
+    <ul>
+      <% if (loggedUserEmail === voteData.voteCreator.email) { %>
+       <li><a href="#" onclick="javascript:deleteVote(`/voting/<%= voteId %>/delete`)">투표삭제 </a></li>
+      <% } %>
+      <li><a href="/">투표목록으로</a></li>
+      <li><a href="#" onclick="javascript:logoutControl('/logout')">로그아웃</a></li>
+    </ul>
+  </nav>
+  생성자: <span><%= voteData.voteCreator.username %></span>
 </header>
 <div>
-  <!-- 진행중인 투표라면 선택사항들 보이도록, 끝난 투표라면 투표결과 보이도록 작성 -->
-  <form>
-    <!-- 여기에 for문으로 선택사항들 출력하자. -->
-    <label>선택사항 이름
-      <input type="radio" name="vote1">
-    </label>
-
-
-
-    <button type="submit">제출</button>
-  </form>
+  <% if (isVoteOpened) { %>
+    <form>
+      <!-- 여기에 for문으로 선택사항들 출력하자. -->
+      <label>선택사항 이름
+        <input type="radio" name="vote1">
+      </label>
+      <button type="submit">제출</button>
+    </form>
+  <% } else { %>
+    <% for( let i = 0; i < voteData.voteItems.length; i++ ) { %>
+      <div>
+        <p>
+          선택지: <%= voteData.voteItems[i].item %>
+          투표된 횟수: <%= voteData.voteItems[i].voted %>
+        </p>
+      </div>
+    <% } %>
+  <% } %>
 </div>

@@ -1,12 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Vote = require('../models/Vote');
-const User = require('../models/User');
-const onlyLoggedInCanView = require('../middlewares/loginAuth');
+const isAuthenticated = require('../middlewares/loginAuth');
+const mainPageControllers = require('./controllers/mainPage.controllers');
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
-  res.render('mainPage');
-});
+router.get('/', isAuthenticated, mainPageControllers.showMainPage);
 
 module.exports = router;
