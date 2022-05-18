@@ -1,32 +1,38 @@
-<div>
-  <form action="/signup" method="post" id="signupForm">
-    <div>
-      <% if (error) { %>
-        <span><%= error %> </span>
-      <% } %>
-    </div>
-    <div>
-    <label>이메일
-      <input type="email" name="email" placeholder="Email" value="<%= email %>" required />
-    </label>
-    </div>
-    <div>
-    <label>이름
-      <input type="text" name="username" placeholder="Name" value="<%= username %>" required />
-    </label>
-    </div>
-    <div>
-    <label>비밀번호
-      <input type="password" name="password" placeholder="Password" required minlength="8" />
-    </label>
-    </div>
-    <div>
-    <label>비밀번호 확인
-      <input type="password" name="password2" placeholder="Password Confirm" required minlength="8" />
-    </label>
-    </div>
-    <div>
-      <button type="submit">회원가입</button>
-    </div>
-  </form>
+<div id="signupbody">
+  <div id="signupwrapper">
+    <form id="signupcontent" action="/signup" method="post" id="signupForm">
+      <div>
+        <% if (error) { %>
+          <span><%= error %> </span>
+        <% } %>
+      </div>
+      <div>
+        <h3>
+          <label>이메일</label>
+        </h3>
+        <input type="email" name="email" placeholder="Email" value="<%= email %>" required />
+      </div>
+      <div>
+        <h3>
+          <label>이름</label>
+        </h3>
+        <input type="text" name="username" placeholder="Name" value="<%= username %>" required />
+      </div>
+      <div>
+        <h3>
+          <label>비밀번호</label>
+        </h3>
+        <input type="password" name="password" placeholder="Password" required minlength="8" />
+      </div>
+      <div>
+        <h3>
+          <label>비밀번호 확인</label>
+        </h3>
+        <input type="password" name="password2" placeholder="Password Confirm" required minlength="8" />
+      </div>
+      <div>
+        <button type="submit">회원가입</button>
+      </div>
+    </form>
+  </div>
 </div>

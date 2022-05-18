@@ -6,17 +6,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     unique: true,
     trim: true,
-    required: true,
     lowercase: true,
     immutable: true,
   },
   username: {
     type: String,
-    required: true,
   },
   password: {
     type: String,
-    required: true,
   },
   voted: {
     type: Array,

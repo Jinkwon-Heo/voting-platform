@@ -44,7 +44,8 @@ exports.createVote = async (req, res, next) => {
     req.body.expireTime = transformTimeFormat(req.body.expireTime);
     const newVote = Vote(req.body);
     await newVote.save();
-    res.render('success');
+    req.flash('voteCreated', '투표가 정상적으로 생성되었습니다.');
+    res.redirect('/');
   } catch (error) {
     next(error);
   }
@@ -71,8 +72,6 @@ exports.showVotePage = async (req, res, next) => {
       return next.voted - prev.voted;
     });
   }
-
-  console.log(voteItems);
 
   res.render('votePage',{
     voteData,

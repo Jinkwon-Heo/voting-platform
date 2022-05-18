@@ -1,7 +1,40 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html {
+  height: 100%;
+  background: #f5f6f7;
 }
+
+#signupbody {
+  position: relative;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+#signuplogo {
+  width: 240px;
+  height: 44px;
+  cursor: pointer;
+}
+
+#signupheader {
+  padding-top: 62px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+#signupwrapper {
+  position: absolute;;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#signupcontent {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  width: 460px;
+}
+
 
 a {
   color: #00B7FF;

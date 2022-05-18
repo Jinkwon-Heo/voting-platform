@@ -3,10 +3,10 @@ exports.showLoginPage = (req, res, next) => {
     const flashErrorMessage = req.flash('error')[0];
 
     if (flashErrorMessage) {
-      return res.render('login', { error: flashErrorMessage });
+      return res.render('login', { error: flashErrorMessage, message: null });
     }
 
-    res.render('login', { error: null });
+    res.render('login', { error: null, message: req.flash('successSignup') });
   } catch (error) {
     next(error);
   }

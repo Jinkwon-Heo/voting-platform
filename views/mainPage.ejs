@@ -18,6 +18,11 @@
   </nav>
 </header>
 <h1>메인페이지</h1>
+<div>
+  <% if (message) { %>
+    <span><%= message %> </span>
+  <% } %>
+</div>
 <% for( let i = 0; i < populatedData.length; i++ ) { %>
   <div onclick="handleClick(event)">
     <p id="<%= populatedData[i]._id %> ">
