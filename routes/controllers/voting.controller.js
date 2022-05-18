@@ -12,7 +12,6 @@ exports.showSuccessPage = (req, res, next) => {
 
 exports.createVote = async (req, res, next) => {
   try {
-    console.log(req.body);
     const presentTime = transformTimeFormat(new Date());
 
     if (presentTime > req.body.expireTime) {
@@ -61,10 +60,19 @@ exports.showVotePage = async (req, res, next) => {
   const id = req.params.vote_id;
   const loggedInUserEmail = req.user.email;
   const voteData = await Vote.findById(id).populate('voteCreator');
+  const voteItems = voteData.voteItems;
   const presentTime = transformTimeFormat(new Date());
   const isVoteOpened = presentTime < voteData.expireTime;
   const votedList = req.user.voted;
   const hasVoted = votedList.includes(id) ? true : false;
+
+  if (!isVoteOpened) {
+    voteItems.sort((prev, next) => {
+      return next.voted - prev.voted;
+    });
+  }
+
+  console.log(voteItems);
 
   res.render('votePage',{
     voteData,
@@ -73,6 +81,7 @@ exports.showVotePage = async (req, res, next) => {
     voteId: id,
     loggedInUserEmail,
     hasVoted,
+    voteItems,
   });
 };
 

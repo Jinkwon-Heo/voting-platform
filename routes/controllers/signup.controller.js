@@ -2,6 +2,7 @@ const User = require('../../models/User');
 
 exports.signupPage = async (req, res, next) => {
   try {
+    console.log(req.user);
     res.render('signup', { error: null, email: null, username: null });
   } catch(error) {
     next(error);
@@ -9,6 +10,7 @@ exports.signupPage = async (req, res, next) => {
 }
 
 exports.join = async (req, res, next) => {
+  console.log(req.user);
   const { username, email, password, password2 } = req.body;
   const isEmailValidate = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
   const hasSymbolCharacter = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
@@ -50,12 +52,13 @@ exports.join = async (req, res, next) => {
       console.log('사용자 등록');
       const user = await User({ username, email });
       await User.register(user, password);
-      req.flash('successJoinId', '회원가입 성공');
+      console.log(123123);
+      // req.flash('successSignup', '회원가입 성공! 로그인 해주세요.');
 
       return res.render('login');
     } catch (error) {
       console.log('에러발생 이미 존재하는 id입니다.');
-      req.flash('error', '이미 존재하는 ID 입니다');
+      req.flash('error', '이미 존재하는 Email 입니다');
 
       return res.render('signup', { error: req.flash('error')[0], email, username });
     }
