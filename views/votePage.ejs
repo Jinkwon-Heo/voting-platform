@@ -16,7 +16,7 @@
     <form action="/voting/<%= voteId %>/voted" method="post">
       <% for( let i = 0; i < voteData.voteItems.length; i++ ) { %>
         <label><%= voteData.voteItems[i].item %>:
-          <input type="radio" name="voteItem" value="<%= voteData.voteItems[i].item %>">
+          <input type="radio" name="voteItem" value="<%= voteData.voteItems[i].item %>" required>
           <% if (loggedInUserEmail === voteData.voteCreator.email) { %>
             투표된 횟수: <%= voteData.voteItems[i].voted %>
           <% } %>

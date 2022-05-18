@@ -1,14 +1,16 @@
 const User = require('../../models/User');
+const store = require('store');
 
 exports.signupPage = async (req, res, next) => {
   try {
-    res.render('signup', { error: null });
+    res.render('signup', { error: null, email: null, username: null });
   } catch(error) {
     next(error);
   }
 }
 
 exports.join = async (req, res, next) => {
+  //store에 입력받은 값 저장해서 회원가입 실패 이후에도 값 남아있게 만들기.
   const { username, email, password, password2 } = req.body;
   const isEmailValidate = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
   const hasSymbolCharacter = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
@@ -19,7 +21,7 @@ exports.join = async (req, res, next) => {
     req.flash('error', '잘못된 이메일 주소입니다.');
     res.status(400);
 
-    return res.render('signup', { error: req.flash('error')[0]});
+    return res.render('signup', { error: req.flash('error')[0], email, username });
   }
 
   if (hasSymbolCharacter.test(username)) {
@@ -27,7 +29,7 @@ exports.join = async (req, res, next) => {
     req.flash('error', '이름에는 특수문자가 들어갈 수 없습니다.');
     res.status(400);
 
-    return res.render('signup', { error: req.flash('error')[0]});
+    return res.render('signup', { error: req.flash('error')[0], email, username });
   }
 
   if (hasSpace.test(username)) {
@@ -35,7 +37,7 @@ exports.join = async (req, res, next) => {
     req.flash('error', '이름에는 공백이 들어갈 수 없습니다.');
     res.status(400);
 
-    return res.render('signup', { error: req.flash('error')[0]});
+    return res.render('signup', { error: req.flash('error')[0], email, username });
   }
 
   if (password !== password2) {
@@ -43,7 +45,7 @@ exports.join = async (req, res, next) => {
     req.flash('error', '패스워드가 일치하지 않습니다');
     res.status(400);
 
-    return res.render('signup', { error: req.flash('error')[0]});
+    return res.render('signup', { error: req.flash('error')[0], email, username });
   } else {
     // 사용자 등록
     try {
@@ -57,7 +59,7 @@ exports.join = async (req, res, next) => {
       console.log('에러발생 이미 존재하는 id입니다.');
       req.flash('error', '이미 존재하는 ID 입니다');
 
-      return res.render('signup', { error: req.flash('error')[0]});
+      return res.render('signup', { error: req.flash('error')[0], email, username });
     }
   }
 }
