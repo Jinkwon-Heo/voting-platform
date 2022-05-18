@@ -1,5 +1,4 @@
 const User = require('../../models/User');
-const store = require('store');
 
 exports.signupPage = async (req, res, next) => {
   try {
@@ -10,7 +9,6 @@ exports.signupPage = async (req, res, next) => {
 }
 
 exports.join = async (req, res, next) => {
-  //store에 입력받은 값 저장해서 회원가입 실패 이후에도 값 남아있게 만들기.
   const { username, email, password, password2 } = req.body;
   const isEmailValidate = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
   const hasSymbolCharacter = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;

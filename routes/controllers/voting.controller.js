@@ -12,10 +12,18 @@ exports.showSuccessPage = (req, res, next) => {
 
 exports.createVote = async (req, res, next) => {
   try {
+    console.log(req.body);
     const presentTime = transformTimeFormat(new Date());
 
     if (presentTime > req.body.expireTime) {
       req.flash('error', '현재 시간보다 이전의 날짜는 선택할 수 없습니다.');
+      res.status(400);
+
+      return res.render('createVote', { error: req.flash('error') });
+    }
+
+    if (typeof(req.body.voteItems) !== 'object') {
+      req.flash('error', '투표 항목은 최소 두 가지 이상이어야 합니다.');
       res.status(400);
 
       return res.render('createVote', { error: req.flash('error') });
@@ -55,6 +63,8 @@ exports.showVotePage = async (req, res, next) => {
   const voteData = await Vote.findById(id).populate('voteCreator');
   const presentTime = transformTimeFormat(new Date());
   const isVoteOpened = presentTime < voteData.expireTime;
+  const votedList = req.user.voted;
+  const hasVoted = votedList.includes(id) ? true : false;
 
   res.render('votePage',{
     voteData,
@@ -62,6 +72,7 @@ exports.showVotePage = async (req, res, next) => {
     loggedUserEmail: req.user.email,
     voteId: id,
     loggedInUserEmail,
+    hasVoted,
   });
 };
 
@@ -83,6 +94,7 @@ exports.submitVote = async (req, res, next) => {
     }
   }
 
+  await User.findOneAndUpdate({ _id: req.user._id }, {$push: {voted: voteId}});
   await Vote.findByIdAndUpdate(voteId, voteData);
   res.redirect('/');
 };
