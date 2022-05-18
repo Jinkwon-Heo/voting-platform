@@ -4,6 +4,11 @@
 <div>
   <form action="/login" method="post">
     <div>
+      <% if (error) { %>
+        <span><%= error %> </span><br>
+      <% } %>
+    </div>
+    <div>
       <label>이메일
         <input type="email" name="email" placeholder="Email" required />
       </label>

@@ -4,6 +4,9 @@
 <div>
   <form action="/login/callback" method="post">
     <div>
+      <% if (error) { %>
+        <span><%= error %> </span><br>
+      <% } %>
       <label>이메일
         <input type="email" name="email" placeholder="Email" required />
       </label>

@@ -42,10 +42,10 @@ const sessionStore = new mongoStore({
 app.use(session({
   store: sessionStore,
   secret: process.env.SECRET_KEY,
-  resave: true,
+  resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 60 * 60 * 1000,
+    maxAge: 1800000,
     httpOnly: true,
   }
 }));

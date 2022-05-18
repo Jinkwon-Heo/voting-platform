@@ -47,7 +47,7 @@ exports.showVotePage = async (req, res, next) => {
   if (!req.user) {
     req.session.callbackUrl = req.originalUrl;
 
-    return res.render('callbackLogin', { callbackUrl: req.originalUrl });
+    return res.render('callbackLogin', { callbackUrl: req.originalUrl, error: null });
   }
 
   const id = req.params.vote_id;

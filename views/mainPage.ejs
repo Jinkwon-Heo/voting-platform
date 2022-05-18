@@ -9,7 +9,11 @@
     <ul>
       <li><a href="/voting/new">투표 생성</a></li>
       <li><a href="/myVotes">내 투표</a></li>
-      <li><a href="#" onclick="javascript:logoutControl('/logout')">로그아웃</a></li>
+      <% if (isLoggedInUser) { %>
+        <li><a href="#" onclick="javascript:logoutControl('/logout')">로그아웃</a></li>
+      <% } else { %>
+        <li><a href="/login">로그인</a></li>
+      <% } %>
     </ul>
   </nav>
 </header>
