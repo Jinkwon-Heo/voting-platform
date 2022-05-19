@@ -9,7 +9,7 @@
   <header>
     <div>
       <% if (message) { %>
-        <span><%= message %> </span>
+        <span class="mainpage-flash"><%= message %> </span>
       <% } %>
     </div>
     <nav>
@@ -24,19 +24,19 @@
       </ul>
     </nav>
   </header>
-  <% for( let i = 0; i < populatedData.length; i++ ) { %>
-    <div class="votelist-item" onclick="handleClick(event)" id="<%= populatedData[i]._id %>">
-      <h4 id="<%= populatedData[i]._id %>">
-        <%= populatedData[i].voteName %>
-      </h4>
-      <div id="<%= populatedData[i]._id %>">
-        <%= presentTime > populatedData[i].expireTime ? "만료" : "진행중"%>
+  <% for( let i = 0; i < sortedVotes.length; i++ ) { %>
+    <div class="votelist-item <%= presentTime > sortedVotes[i].expireTime ? "vote-end" : "vote-proceed" %>" onclick="handleClick(event)" id="<%= sortedVotes[i]._id %>">
+      <h3 id="<%= sortedVotes[i]._id %>">
+        <%= sortedVotes[i].voteName %>
+      </h3>
+      <div id="<%= sortedVotes[i]._id %>">
+        <%= presentTime > sortedVotes[i].expireTime ? "만료" : "진행중"%>
       </div>
-      <div id="<%= populatedData[i]._id %>">
-        투표생성자: <%= populatedData[i].voteCreator.username %><br>
+      <div id="<%= sortedVotes[i]._id %>">
+        생성자: <%= sortedVotes[i].voteCreator.username %>
       </div>
-      <div id="<%= populatedData[i]._id %>">
-        투표만료일: <%= populatedData[i].expireTime %><br>
+      <div id="<%= sortedVotes[i]._id %>">
+        <%= sortedVotes[i].expireTime %>까지
       </div>
     </div>
   <% } %>
