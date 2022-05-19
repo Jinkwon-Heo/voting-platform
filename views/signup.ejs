@@ -1,37 +1,45 @@
-<div id="signupbody">
-  <div id="signupwrapper">
-    <form id="signupcontent" action="/signup" method="post" id="signupForm">
+<div id="signup-container">
+  <div class="login-form-wrapper">
+    <form action="/signup" method="post" id="signupForm">
       <div>
         <% if (error) { %>
-          <span><%= error %> </span>
+          <span class="alert-flash"><%= error %> </span>
         <% } %>
       </div>
       <div>
         <h3>
-          <label>이메일</label>
+          <label>Email</label>
         </h3>
-        <input type="email" name="email" placeholder="Email" value="<%= email %>" required />
+        <div class="input-wrapper">
+          <input class="login-item-input" type="email" name="email" placeholder="abc@def.com" value="<%= email %>" required />
+        </div>
       </div>
       <div>
         <h3>
-          <label>이름</label>
+          <label>Name</label>
         </h3>
-        <input type="text" name="username" placeholder="Name" value="<%= username %>" required />
+        <div class="input-wrapper">
+          <input class="login-item-input" type="text" name="username" placeholder="Your name" value="<%= username %>" required />
+        </div>
       </div>
       <div>
         <h3>
-          <label>비밀번호</label>
+          <label>Password</label>
         </h3>
-        <input type="password" name="password" placeholder="Password" required minlength="8" />
+        <div class="input-wrapper">
+          <input class="login-item-input" type="password" name="password" placeholder="Password" required minlength="8" />
+        </div>
       </div>
       <div>
         <h3>
-          <label>비밀번호 확인</label>
+          <label>Password confirm</label>
         </h3>
-        <input type="password" name="password2" placeholder="Password Confirm" required minlength="8" />
+        <div class="input-wrapper">
+          <input class="login-item-input" type="password" name="password2" placeholder="Password Confirm" required minlength="8" />
+        </div>
       </div>
       <div>
-        <button type="submit">회원가입</button>
+        <button class="loginbutton" type="submit">Submit</button>
       </div>
     </form>
   </div>

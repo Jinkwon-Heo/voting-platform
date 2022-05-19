@@ -7,6 +7,9 @@
 <div class="container">
 <div id="mainpage-container">
   <header>
+    <div class="flux">
+      Welcome!
+    </div>
     <div>
       <% if (message) { %>
         <span class="mainpage-flash"><%= message %> </span>
@@ -24,8 +27,8 @@
       </ul>
     </nav>
   </header>
-  <% for( let i = 0; i < sortedVotes.length; i++ ) { %>
-    <div class="votelist-item <%= presentTime > sortedVotes[i].expireTime ? "vote-end" : "vote-proceed" %>" onclick="handleClick(event)" id="<%= sortedVotes[i]._id %>">
+  <% for ( let i = 0; i < sortedVotes.length; i++ ) { %>
+    <div class="votelist-item <%= presentTime > sortedVotes[i].expireTime ? "vote-end" : "vote-proceed" %> " onclick="handleClick(event)" id="<%= sortedVotes[i]._id %>">
       <h3 id="<%= sortedVotes[i]._id %>">
         <%= sortedVotes[i].voteName %>
       </h3>

@@ -1,17 +1,17 @@
 <div id="login-container">
   <div class="callbacklogintext-container">
-    <div class="callbacklogintext-flux">
+    <div class="flux">
       당신의 한 표가 세상을 바꿉니다.
     </div>
   </div>
   <div class="login-flash-wrapper">
     <% if (error) { %>
-      <span><%= error %> </span><br>
+      <span class="alert-flash"><%= error %> </span><br>
     <% } %>
   </div>
   <div class="login-form-wrapper">
     <form action="/login/callback" method="post" class="login-form">
-      <div class="login-input-wrapper container">
+      <div class="input-wrapper container">
         <div>
           <input class="login-item-input email" type="email" name="email" placeholder="Email" required />
         </div>

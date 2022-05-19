@@ -3,43 +3,52 @@ html {
   background: #f5f6f7;
 }
 
-#signupbody {
-  position: relative;
-  font-family: 'Times New Roman', Times, serif;
+.alert-flash {
+  animation: warning 1.5s linear infinite;
 }
 
-#signuplogo {
-  width: 240px;
-  height: 44px;
-  cursor: pointer;
+@keyframes warning {
+  0%,
+  100% {
+    color: #f90723;
+  }
+  70% {
+    color: black;
+  }
 }
 
-#signupheader {
-  padding-top: 62px;
-  padding-bottom: 20px;
-  text-align: center;
+.flux {
+  animation: flux 2s linear infinite;
+  -moz-animation: flux 2s linear infinite;
+  -webkit-animation: flux 2s linear infinite;
+  -o-animation: flux 2s linear infinite;
 }
 
-#signupwrapper {
-  position: absolute;;
-  height: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+@keyframes flux {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
+    color: #28D7FE;
+  }
+  50% {
+    text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
+    color: #146C80;
+  }
 }
 
-#signupcontent {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
-  width: 460px;
+#signup-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #login-container {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -51,7 +60,7 @@ html {
   width: 360px;
 }
 
-.login-input-wrapper {
+.input-wrapper {
   box-shadow:
   0px 5px 8px 3px rgb(0 0 0 / 30%),
   0px 2px 5px -2px rgba(0, 0, 0, 0.418),
@@ -149,14 +158,14 @@ html {
   vertical-align: middle;
 }
 
-.callbacklogintext-flux {
+.flux {
   font-family: neon;
   color: #4e75f2c7;
   font-size: 30px;
   line-height: 100px;
 }
 
-.callbacklogintext-flux {
+.flux {
   animation: flux 2s linear infinite;
   -moz-animation: flux 2s linear infinite;
   -webkit-animation: flux 2s linear infinite;
@@ -307,11 +316,13 @@ ul {
   padding-left: 5px;
   content: "|";
   opacity: 30%;
+  font-size: 25px;
 }
 
 .mainpage-nav li:last-child::after {
   content: "|";
   opacity: 30%;
+  font-size: 25px;
 }
 
 .mainpage-nav li:first-child::after {
@@ -323,7 +334,9 @@ ul {
   cursor: pointer;
   transition-duration: 0.4s;
   background: rgb(239, 234, 247);
-  border-radius: 15%;
+  border-radius: 8%;
+  border : 1px;
+  border-style: groove;
   box-shadow:
   0px 5px 8px 3px rgb(0 0 0 / 30%),
   0px 2px 5px -2px rgba(0, 0, 0, 0.418),

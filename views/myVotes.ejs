@@ -4,23 +4,37 @@
     location.href = `/voting/${id}`;
   }
 </script>
-<header>
-  <nav>
-    <ul>
-      <li><a href="/">투표리스트로</a></li>
-      <li><a href="#" onclick="javascript:logoutControl('/logout')">로그아웃</a></li>
-    </ul>
-  </nav>
-</header>
-<h1>내 투표 페이지</h1>
-<div>
-  <% for( let i = 0; i < filteredData.length; i++ ) { %>
-    <div onclick="handleClick(event)">
-      <p id="<%= filteredData[i]._id %> ">
-        투표이름: <%= filteredData[i].voteName %><br>
-        투표생성자: <%= filteredData[i].voteCreator.username %><br>
-        투표만료일: <%= filteredData[i].expireTime %><br>
-      </p>
-    </div>
-  <% } %>
+<div class="container">
+  <div id="mainpage-container">
+    <header>
+      <div class="flux">
+        My votes
+      </div>
+      <div>
+        <span style="opacity: 0%;">dummy</span>
+      </div>
+      <nav>
+        <ul class="mainpage-nav">
+          <li><a href="/">Main page</a></li>
+          <li><a href="#" onclick="javascript:logoutControl('/logout')">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+    <% for( let i = 0; i < filteredData.length; i++ ) { %>
+      <div class="votelist-item <%= presentTime > filteredData[i].expireTime ? "vote-end" : "vote-proceed" %>" onclick="handleClick(event)" id="<%= filteredData[i]._id %>">
+        <h3 id="<%= filteredData[i]._id %>">
+          <%= filteredData[i].voteName %>
+        </h3>
+        <div id="<%= filteredData[i]._id %>">
+          <%= presentTime > filteredData[i].expireTime ? "만료" : "진행중"%>
+        </div>
+        <div id="<%= filteredData[i]._id %>">
+          생성자: <%= filteredData[i].voteCreator.username %>
+        </div>
+        <div id="<%= filteredData[i]._id %>">
+          <%= filteredData[i].expireTime %>까지
+        </div>
+      </div>
+    <% } %>
+  </div>
 </div>
