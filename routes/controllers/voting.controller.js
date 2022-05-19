@@ -102,7 +102,7 @@ exports.submitVote = async (req, res, next) => {
     }
   }
 
-  await User.findOneAndUpdate({ _id: req.user._id }, {$push: {voted: voteId}});
+  await User.findOneAndUpdate({ _id: req.user._id }, { $push: { voted: voteId } });
   await Vote.findByIdAndUpdate(voteId, voteData);
   res.redirect('/');
 };

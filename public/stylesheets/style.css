@@ -35,6 +35,241 @@ html {
   width: 460px;
 }
 
+#login-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+}
+
+.login-item-image {
+  size: 30%;
+}
+
+.login-form-wrapper {
+  width: 360px;
+}
+
+.login-input-wrapper {
+  box-shadow:
+  0px 5px 8px 3px rgb(0 0 0 / 30%),
+  0px 2px 5px -2px rgba(0, 0, 0, 0.418),
+  0px 2px 5px -7px rgb(0 0 0 / 20%);
+}
+
+.login-item-input {
+  width: 100%;
+  padding: 14px 17px 13px;
+  box-sizing: border-box;
+}
+
+.loginbutton {
+  padding: 10px;
+  margin: 30px 0px;
+  width: 100%;
+  box-sizing: border-box;
+  float: left;
+  transition-duration: 0.4s;
+  background: white;
+  border-radius: 2pt;
+  border: 0;
+  outline: 0;
+  box-shadow:
+  0px 5px 8px 3px rgb(0 0 0 / 30%),
+  0px 2px 5px -2px rgba(0, 0, 0, 0.418),
+  0px 2px 5px -7px rgb(0 0 0 / 20%);
+}
+
+.loginbutton:hover {
+  background-color: rgba(159, 159, 159, 0.255);
+  color: white;
+}
+
+.login-another-button-wrapper {
+  text-align: center;
+}
+
+.login-another-button {
+  padding: 10px;
+  margin-left: 30px;
+  transition-duration: 0.4s;
+  background: white;
+  border-radius: 2pt;
+  border: 0;
+  outline: 0;
+  box-shadow:
+  0px 5px 8px 3px rgb(0 0 0 / 10%),
+  0px 2px 5px -2px rgba(0, 0, 0, 0.218),
+  0px 2px 5px -7px rgb(0 0 0 / 10%);
+}
+
+.login-another-button:hover {
+  background-color: rgba(159, 159, 159, 0.255);
+  color: white;
+}
+
+.login-another-button-join {
+  padding: 10px 24px;
+  margin-left: 30px;
+  transition-duration: 0.4s;
+  background: white;
+  border-radius: 2pt;
+  border: 0;
+  outline: 0;
+  box-shadow:
+  0px 5px 8px 3px rgb(0 0 0 / 10%),
+  0px 2px 5px -2px rgba(0, 0, 0, 0.218),
+  0px 2px 5px -7px rgb(0 0 0 / 10%);
+}
+
+.login-another-button-join:hover {
+  background-color: rgba(159, 159, 159, 0.255);
+  color: white;
+}
+
+.container::before, .container::after
+{
+  position: absolute;
+  content : "";
+  top: -5%;
+  left: -5%;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  opacity: 0.5;
+  filter: blur(60px);
+}
+
+.container::after
+{
+  background-color:#0055ff88;
+  z-index: -1;
+  animation : backglow2 15s ease infinite;
+}
+
+.container::before
+{
+  background-color:#ff6200aa;
+  z-index: -2;
+  animation : backglow1 15s ease infinite;
+}
+
+@keyframes backglow1
+{
+  0%
+  {
+    transform: translate(10%, 10%) scale(1);
+    opacity:0.5;
+  }
+
+  25%
+  {
+    transform: translate(-10%, 10%) scale(0.8);
+    opacity:0.5;
+  }
+
+  50%
+  {
+    transform: translate(-10%, -10%) scale(1.2);
+    opacity:0.8;
+  }
+
+  75%
+  {
+    transform: translate(10%, -10%) scale(1.1);
+    opacity:0.2;
+  }
+
+  100%
+  {
+    transform: translate(10%, 10%) scale(1);
+    opacity:0.5;
+  }
+}
+
+@keyframes backglow2
+{
+
+  0%
+  {
+    transform: translate(-10%, -10%) scale(1);
+    opacity:0.5;
+  }
+
+  25%
+  {
+    transform: translate(10%, -10%) scale(0.8);
+    opacity:0.5;
+  }
+
+  50%
+  {
+    transform: translate(10%, 10%) scale(1.2);
+    opacity:0.8;
+  }
+
+  75%
+  {
+    transform: translate(-10%, 10%) scale(1.1);
+    opacity:0.2;
+  }
+
+  100%
+  {
+    transform: translate(-10%, -10%) scale(1);
+    opacity:0.5;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+.mainpage-nav li {
+  float: right;
+  margin-right: 5px;
+}
+
+.mainpage-nav li::after {
+  padding-left: 5px;
+  content: "|";
+}
+
+.mainpage-nav li:last-child::after {
+  content: "|";
+}
+
+.mainpage-nav li:first-child::after {
+  content: "";
+}
+
+.votelist-item {
+  transition-duration: 0.4s;
+  background: white;
+  border-radius: 2pt;
+  box-shadow:
+  0px 5px 8px 3px rgb(0 0 0 / 30%),
+  0px 2px 5px -2px rgba(0, 0, 0, 0.418),
+  0px 2px 5px -7px rgb(0 0 0 / 20%);
+}
+
+.votelist-item:hover {
+  background-color: rgba(159, 159, 159, 0.255);
+}
+
+#mainpage-container {
+  display: grid;
+  margin: 0 40px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+  "header header header";
+  align-content: space-evenly;
+  justify-content: space-evenly;
+  text-align: center;
+  gap: 30px;
+}
+header {grid-area: header;};
 
 a {
   color: #00B7FF;

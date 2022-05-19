@@ -4,32 +4,41 @@
     location.href = `/voting/${id}`;
   }
 </script>
-<header>
-  <nav>
-    <ul>
-      <li><a href="/voting/new">투표 생성</a></li>
-      <li><a href="/myVotes">내 투표</a></li>
-      <% if (isLoggedInUser) { %>
-        <li><a href="#" onclick="javascript:logoutControl('/logout')">로그아웃</a></li>
-      <% } else { %>
-        <li><a href="/login">로그인</a></li>
+<div class="container">
+<div id="mainpage-container">
+  <header>
+    <div>
+      <% if (message) { %>
+        <span><%= message %> </span>
       <% } %>
-    </ul>
-  </nav>
-</header>
-<h1>메인페이지</h1>
-<div>
-  <% if (message) { %>
-    <span><%= message %> </span>
+    </div>
+    <nav>
+      <ul class="mainpage-nav">
+        <li><a href="/voting/new">Create vote</a></li>
+        <li><a href="/myVotes">My vote</a></li>
+        <% if (isLoggedInUser) { %>
+          <li><a href="#" onclick="javascript:logoutControl('/logout')">Logout</a></li>
+        <% } else { %>
+          <li><a href="/login">Login</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>
+  <% for( let i = 0; i < populatedData.length; i++ ) { %>
+    <div class="votelist-item" onclick="handleClick(event)" id="<%= populatedData[i]._id %>">
+      <h4 id="<%= populatedData[i]._id %>">
+        <%= populatedData[i].voteName %>
+      </h4>
+      <div id="<%= populatedData[i]._id %>">
+        <%= presentTime > populatedData[i].expireTime ? "만료" : "진행중"%>
+      </div>
+      <div id="<%= populatedData[i]._id %>">
+        투표생성자: <%= populatedData[i].voteCreator.username %><br>
+      </div>
+      <div id="<%= populatedData[i]._id %>">
+        투표만료일: <%= populatedData[i].expireTime %><br>
+      </div>
+    </div>
   <% } %>
 </div>
-<% for( let i = 0; i < populatedData.length; i++ ) { %>
-  <div onclick="handleClick(event)">
-    <p id="<%= populatedData[i]._id %> ">
-      투표이름: <%= populatedData[i].voteName %><br>
-      투표생성자: <%= populatedData[i].voteCreator.username %><br>
-      투표만료일: <%= populatedData[i].expireTime %><br>
-      만료여부: <%= presentTime > populatedData[i].expireTime ? "만료" : "진행중"%>
-    </p>
-  </div>
-<% } %>
+</div>
