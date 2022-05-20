@@ -15,7 +15,7 @@
   <% if (hasVoted && isVoteOpened) { %>
    <h2>투표해주셔서 감사합니다. 투표가 종료되면 이메일로 알림이 갑니다.</h2>
   <% } %>
-  <% if (loggedInUserEmail === voteData.voteCreator.email) { %>
+  <% if (loggedInUserEmail === voteData.voteCreator.email && hasVoted) { %>
     <% for( let i = 0; i < voteData.voteItems.length; i++ ) { %>
       <div>
         <p>

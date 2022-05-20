@@ -5,7 +5,7 @@ const expireMessageSpan = document.getElementById('expireMessageSpan');
 
 const addItem = () => {
   const newVoteInput = document.createElement('p');
-  newVoteInput.innerHTML = "<input type='text' name='voteItems' required autofocus> <input type='button' value='delete' onclick='remove(this)'>";
+  newVoteInput.innerHTML = "<div class='input-wrapper'><input class='createvote-item-input fancy-item' type='text' name='voteItems' placeholder='Vote item' required autofocus></div> <input type='button' value='delete' onclick='remove(this)'>";
   itemBox.appendChild(newVoteInput);
 };
 

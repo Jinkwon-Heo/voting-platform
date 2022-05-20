@@ -3,6 +3,9 @@ const { INTERNAL_ERROR } = require('../../constants/errorMessage');
 
 exports.showPlainLoginPage = (req, res, next) => {
   try {
+    req.session.destroy(() => {
+      req.session;
+    });
     res.render('login', { error: null, message: null} );
   } catch (error) {
     next(error);
