@@ -1,3 +1,5 @@
+const createError = require('http-errors');
+const { INTERNAL_ERROR } = require('../../constants/errorMessage');
 const User = require('../../models/User');
 const Vote = require('../../models/Vote');
 const transformTimeFormat = require('../../util/transformTimeFormat');
@@ -59,50 +61,64 @@ exports.showVotePage = async (req, res, next) => {
 
   const id = req.params.vote_id;
   const loggedInUserEmail = req.user.email;
-  const voteData = await Vote.findById(id).populate('voteCreator');
-  const voteItems = voteData.voteItems;
-  const presentTime = transformTimeFormat(new Date());
-  const isVoteOpened = presentTime < voteData.expireTime;
   const votedList = req.user.voted;
-  const hasVoted = votedList.includes(id) ? true : false;
 
-  if (!isVoteOpened) {
-    voteItems.sort((prev, next) => {
-      return next.voted - prev.voted;
+  try {
+    const voteData = await Vote.findById(id).populate('voteCreator');
+    const voteItems = voteData.voteItems;
+    const presentTime = transformTimeFormat(new Date());
+    const isVoteOpened = presentTime < voteData.expireTime;
+    const hasVoted = votedList.includes(id) ? true : false;
+
+    if (!isVoteOpened) {
+      voteItems.sort((prev, next) => {
+        return next.voted - prev.voted;
+      });
+    }
+
+    res.render('votePage',{
+      voteData,
+      isVoteOpened,
+      loggedUserEmail: req.user.email,
+      voteId: id,
+      loggedInUserEmail,
+      hasVoted,
+      voteItems,
     });
+  } catch (error) {
+    next(createError(500, INTERNAL_ERROR));
   }
-
-  res.render('votePage',{
-    voteData,
-    isVoteOpened,
-    loggedUserEmail: req.user.email,
-    voteId: id,
-    loggedInUserEmail,
-    hasVoted,
-    voteItems,
-  });
 };
 
 exports.deleteVote = async (req, res, next) => {
-  const id = req.params.vote_id;
-  await Vote.findByIdAndDelete(id);
-  res.redirect('/');
+  try {
+    const id = req.params.vote_id;
+    await Vote.findByIdAndDelete(id);
+    res.redirect('/');
+  } catch (error) {
+    next(createError(500, INTERNAL_ERROR));
+  }
 };
 
 exports.submitVote = async (req, res, next) => {
   const voteId = req.params.vote_id;
   const optionName = req.body.voteItem;
-  const voteData = await Vote.findById(voteId);
 
-  for (let i = 0; i < voteData.voteItems.length; i++) {
-    if (voteData.voteItems[i].item === optionName) {
-      voteData.voteItems[i].voted++;
-      break;
+  try {
+    const voteData = await Vote.findById(voteId);
+
+    for (let i = 0; i < voteData.voteItems.length; i++) {
+      if (voteData.voteItems[i].item === optionName) {
+        voteData.voteItems[i].voted++;
+        break;
+      }
     }
-  }
 
-  await User.findOneAndUpdate({ _id: req.user._id }, { $push: { voted: voteId } });
-  await Vote.findByIdAndUpdate(voteId, voteData);
-  req.flash('voteSuccess', '투표해주셔서 감사합니다.');
-  res.redirect('/');
+    await User.findOneAndUpdate({ _id: req.user._id }, { $push: { voted: voteId } });
+    await Vote.findByIdAndUpdate(voteId, voteData);
+    req.flash('voteSuccess', '투표해주셔서 감사합니다.');
+    res.redirect('/');
+  } catch (error) {
+    next(createError(500, INTERNAL_ERROR));
+  }
 };

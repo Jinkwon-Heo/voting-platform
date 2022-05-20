@@ -1,6 +1,8 @@
+const createError = require('http-errors');
 const Vote = require('../../models/Vote');
 const transformTimeFormat = require('../../util/transformTimeFormat');
 const { sortVoteList } = require('../../services/sortVoteList');
+const { INTERNAL_ERROR } = require('../../constants/errorMessage');
 
 exports.showMainPage = async function(req, res, next) {
   try {
@@ -27,7 +29,6 @@ exports.showMainPage = async function(req, res, next) {
       message: flashMessage,
     });
   } catch (error) {
-    console.log(error);
-    next(error);
+    next(createError(500, INTERNAL_ERROR));
   }
 };
