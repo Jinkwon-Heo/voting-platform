@@ -1,9 +1,22 @@
 html {
   height: 100%;
   background: #f5f6f7;
+  font-family: 'GangwonEdu_OTFBoldA';
+}
+
+button {
+  cursor: pointer;
+}
+
+@font-face {
+  font-family: 'GangwonEdu_OTFBoldA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .alert-flash {
+  font-size: 18px;
   animation: warning 1.5s linear infinite;
 }
 
@@ -74,12 +87,16 @@ html {
 }
 
 .login-item-input {
+  font-family: 'GangwonEdu_OTFBoldA';
+  font-size: 15px;
   width: 100%;
   padding: 14px 17px 13px;
   box-sizing: border-box;
 }
 
 .loginbutton {
+  font-family: 'GangwonEdu_OTFBoldA';
+  font-size: 15px;
   padding: 10px;
   margin: 30px 0px;
   width: 100%;
@@ -106,6 +123,8 @@ html {
 }
 
 .login-another-button {
+  font-family: 'GangwonEdu_OTFBoldA';
+  font-size: 15px;
   padding: 10px;
   margin-left: 30px;
   transition-duration: 0.4s;
@@ -125,6 +144,8 @@ html {
 }
 
 .login-another-button-join {
+  font-family: 'GangwonEdu_OTFBoldA';
+  font-size: 15px;
   padding: 10px 24px;
   margin-left: 30px;
   transition-duration: 0.4s;
@@ -231,25 +252,21 @@ a:visited {
     transform: translate(10%, 10%) scale(1);
     opacity:0.5;
   }
-
   25%
   {
     transform: translate(-10%, 10%) scale(0.8);
     opacity:0.5;
   }
-
   50%
   {
     transform: translate(-10%, -10%) scale(1.2);
     opacity:0.8;
   }
-
   75%
   {
     transform: translate(10%, -10%) scale(1.1);
     opacity:0.2;
   }
-
   100%
   {
     transform: translate(10%, 10%) scale(1);
@@ -259,31 +276,26 @@ a:visited {
 
 @keyframes backglow2
 {
-
   0%
   {
     transform: translate(-10%, -10%) scale(1);
     opacity:0.5;
   }
-
   25%
   {
     transform: translate(10%, -10%) scale(0.8);
     opacity:0.5;
   }
-
   50%
   {
     transform: translate(10%, 10%) scale(1.2);
     opacity:0.8;
   }
-
   75%
   {
     transform: translate(-10%, 10%) scale(1.1);
     opacity:0.2;
   }
-
   100%
   {
     transform: translate(-10%, -10%) scale(1);

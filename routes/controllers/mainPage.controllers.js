@@ -12,7 +12,7 @@ exports.showMainPage = async function(req, res, next) {
 
     const votedFlash = req.flash('voteSuccess')[0];
     const createdFlash = req.flash('voteCreated')[0];
-    let flashMessage;
+    let flashMessage = null;
 
     if (votedFlash) {
       flashMessage = votedFlash;
