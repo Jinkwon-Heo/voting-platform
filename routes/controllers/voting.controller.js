@@ -13,6 +13,10 @@ exports.showSuccessPage = (req, res, next) => {
 exports.createVote = async (req, res, next) => {
   try {
     const presentTime = transformTimeFormat(new Date());
+    const loggedInUserEmail = req.session.passport.user;
+    const userData = await User.findOne({ email: loggedInUserEmail });
+    const items = req.body.voteItems;
+    const objectedItems = [];
 
     if (presentTime > req.body.expireTime) {
       req.flash('error', '현재 시간보다 이전의 날짜는 선택할 수 없습니다.');
@@ -28,17 +32,12 @@ exports.createVote = async (req, res, next) => {
       return res.render('createVote', { error: req.flash('error') });
     }
 
-    const loggedInUserEmail = req.session.passport.user;
-    const items = req.body.voteItems;
-    const objectedItems = [];
-
     for (let i = 0; i < items.length; i++) {
       const objectedItem = {};
       objectedItem.item = items[i];
       objectedItems.push(objectedItem);
     }
 
-    const userData = await User.findOne({ email: loggedInUserEmail });
     req.body.voteCreator = userData._id;
     req.body.voteItems = objectedItems;
     req.body.expireTime = transformTimeFormat(req.body.expireTime);
@@ -104,5 +103,6 @@ exports.submitVote = async (req, res, next) => {
 
   await User.findOneAndUpdate({ _id: req.user._id }, { $push: { voted: voteId } });
   await Vote.findByIdAndUpdate(voteId, voteData);
+  req.flash('voteSuccess', '투표해주셔서 감사합니다.');
   res.redirect('/');
 };

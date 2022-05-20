@@ -7,12 +7,12 @@
       <span class="alert-flash"><%= error %> </span><br>
     <% } %>
     <% if (message) { %>
-      <span><%= message %> </span><br>
+      <span class="success-flash"><%= message %> </span><br>
     <% } %>
   </div>
   <div class="login-form-wrapper">
     <form action="/login" method="post" class="login-form">
-      <div class="input-wrapper container">
+      <div class="input-wrapper">
         <div>
           <input class="login-item-input email" type="email" name="email" placeholder="Email" required />
         </div>

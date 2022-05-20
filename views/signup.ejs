@@ -1,46 +1,49 @@
 <div id="signup-container">
-  <div class="login-form-wrapper">
-    <form action="/signup" method="post" id="signupForm">
-      <div>
-        <% if (error) { %>
-          <span class="alert-flash"><%= error %> </span>
-        <% } %>
-      </div>
-      <div>
-        <h3>
-          <label>Email</label>
-        </h3>
-        <div class="input-wrapper">
-          <input class="login-item-input" type="email" name="email" placeholder="abc@def.com" value="<%= email %>" required />
+  <div class="signup">
+    <div class="login-form-wrapper">
+      <form action="/signup" method="post" id="signupForm">
+        <div>
+          <% if (error) { %>
+            <span class="alert-flash"><%= error %> </span>
+          <% } %>
         </div>
-      </div>
-      <div>
-        <h3>
-          <label>Name</label>
-        </h3>
-        <div class="input-wrapper">
-          <input class="login-item-input" type="text" name="username" placeholder="Your name" value="<%= username %>" required />
+        <div>
+          <h3>
+            <label>Email</label>
+          </h3>
+          <div class="input-wrapper">
+            <input class="login-item-input" type="email" name="email" placeholder="abc@def.com" value="<%= email %>" required />
+          </div>
         </div>
-      </div>
-      <div>
-        <h3>
-          <label>Password</label>
-        </h3>
-        <div class="input-wrapper">
-          <input class="login-item-input" type="password" name="password" placeholder="Password" required minlength="8" />
+        <div>
+          <h3>
+            <label>Name</label>
+          </h3>
+          <div class="input-wrapper">
+            <input class="login-item-input" type="text" name="username" placeholder="Your name" value="<%= username %>" required />
+          </div>
         </div>
-      </div>
-      <div>
-        <h3>
-          <label>Password confirm</label>
-        </h3>
-        <div class="input-wrapper">
-          <input class="login-item-input" type="password" name="password2" placeholder="Password Confirm" required minlength="8" />
+        <div>
+          <h3>
+            <label>Password</label>
+          </h3>
+          <div class="input-wrapper">
+            <input class="login-item-input" type="password" name="password" placeholder="Password" required minlength="8" />
+          </div>
         </div>
-      </div>
-      <div>
-        <button class="loginbutton" type="submit">Submit</button>
-      </div>
-    </form>
+        <div>
+          <h3>
+            <label>Password confirm</label>
+          </h3>
+          <div class="input-wrapper">
+            <input class="login-item-input" type="password" name="password2" placeholder="Password Confirm" required minlength="8" />
+          </div>
+        </div>
+        <div>
+          <button class="loginbutton" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
+

@@ -12,7 +12,7 @@
     </div>
     <div>
       <% if (message) { %>
-        <span class="mainpage-flash"><%= message %> </span>
+        <span class="success-flash"><%= message %> </span>
       <% } %>
     </div>
     <nav>
@@ -27,6 +27,9 @@
       </ul>
     </nav>
   </header>
+  <% if (!sortedVotes.length) { %>
+   <div>진행중인 투표가 없습니다.</div>
+  <% } %>
   <% for ( let i = 0; i < sortedVotes.length; i++ ) { %>
     <div class="votelist-item <%= presentTime > sortedVotes[i].expireTime ? "vote-end" : "vote-proceed" %> " onclick="handleClick(event)" id="<%= sortedVotes[i]._id %>">
       <h3 id="<%= sortedVotes[i]._id %>">

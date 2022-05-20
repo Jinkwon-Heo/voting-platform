@@ -20,6 +20,11 @@
         </ul>
       </nav>
     </header>
+    <% if (!filteredData.length) { %>
+     <div>
+       만든 투표가 없습니다. 지금 만들어보세요!
+     </div>
+    <% } %>
     <% for( let i = 0; i < filteredData.length; i++ ) { %>
       <div class="votelist-item <%= presentTime > filteredData[i].expireTime ? "vote-end" : "vote-proceed" %>" onclick="handleClick(event)" id="<%= filteredData[i]._id %>">
         <h3 id="<%= filteredData[i]._id %>">

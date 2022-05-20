@@ -20,6 +20,7 @@ const signup = require('./routes/signup');
 const logout = require('./routes/logout');
 const myVotes = require('./routes/myVotes');
 const voting = require('./routes/voting');
+const { PAGE_NOT_FOUND } = require('./constants/errorMessage');
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -60,9 +61,8 @@ app.use('/logout', logout);
 app.use('/myVotes', myVotes);
 app.use('/voting', voting);
 
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  next(createError(404, PAGE_NOT_FOUND));
 });
 
 app.use(function(err, req, res, next) {
