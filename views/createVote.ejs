@@ -1,40 +1,40 @@
 <header>
   <nav>
     <ul>
-        <li><a href="/">투표목록으로</a></li>
-        <li><a href="#" onclick="javascript:logoutControl('/logout')">로그아웃</a></li>
+        <li><a href='/'>투표목록으로</a></li>
+        <li><a href='#' onclick="javascript:logoutControl('/logout')">로그아웃</a></li>
     </ul>
   </nav>
 </header>
 <div>
-  <span id="expireMessageSpan"></span>
+  <span id='expireMessageSpan'></span>
   <% if (error) { %>
-    <span class="alert-flash"><%= error %> </span>
+    <span class='alert-flash'><%= error %> </span>
   <% } %>
 </div>
 <div>
-  <form action="/voting/new" method="post">
+  <form action='/voting/new' method='post'>
     <div>
       <label>제목
-        <input type="text" required name="voteName" minlength="2" maxlength="20" autofocus />
+        <input type='text' required name='voteName' minlength='2' maxlength='20' autofocus />
       </label>
     </div>
-    <div class="itemBox">
+    <div class='itemBox'>
       <p>
-        <input type="text" required name="voteItems"/>
-        <input type="button" value="추가" onclick="addItem()" />
+        <input type='text' required name='voteItems'/>
+        <input type='button' value='추가' onclick='addItem()' />
       </p>
       <p>
-        <input type="text" required name="voteItems"/>
+        <input type='text' required name='voteItems'/>
       </p>
     </div>
     <div>
       <label>투표만료날짜
-        <input type="datetime-local" required name="expireTime" id="expireTime" />
+        <input type='datetime-local' required name='expireTime' id='expireTime' />
       </label>
     </div>
     <div>
-      <button type="submit">투표 생성</button>
+      <button type='submit'>투표 생성</button>
     </div>
   </form>
 </div>

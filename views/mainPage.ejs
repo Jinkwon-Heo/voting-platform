@@ -4,25 +4,25 @@
     location.href = `/voting/${id}`;
   }
 </script>
-<div class="container">
-<div id="mainpage-container">
+<div class='container'>
+<div id='mainpage-container'>
   <header>
-    <div class="flux">
+    <div class='flux'>
       Welcome!
     </div>
     <div>
       <% if (message) { %>
-        <span class="success-flash"><%= message %> </span>
+        <span class='success-flash'><%= message %> </span>
       <% } %>
     </div>
     <nav>
-      <ul class="mainpage-nav">
-        <li><a href="/voting/new">Create vote</a></li>
-        <li><a href="/myVotes">My vote</a></li>
+      <ul class='mainpage-nav'>
+        <li><a href='/voting/new'>Create vote</a></li>
+        <li><a href='/myVotes'>My vote</a></li>
         <% if (isLoggedInUser) { %>
-          <li><a href="#" onclick="javascript:logoutControl('/logout')">Logout</a></li>
+          <li><a href='#' onclick="javascript:logoutControl('/logout')">Logout</a></li>
         <% } else { %>
-          <li><a href="/login">Login</a></li>
+          <li><a href='/login'>Login</a></li>
         <% } %>
       </ul>
     </nav>
@@ -31,17 +31,17 @@
    <div>진행중인 투표가 없습니다.</div>
   <% } %>
   <% for ( let i = 0; i < sortedVotes.length; i++ ) { %>
-    <div class="votelist-item <%= presentTime > sortedVotes[i].expireTime ? "vote-end" : "vote-proceed" %> " onclick="handleClick(event)" id="<%= sortedVotes[i]._id %>">
-      <h3 id="<%= sortedVotes[i]._id %>">
+    <div class='votelist-item <%= presentTime > sortedVotes[i].expireTime ? 'vote-end' : 'vote-proceed' %> ' onclick='handleClick(event)' id='<%= sortedVotes[i]._id %>'>
+      <h3 id='<%= sortedVotes[i]._id %>'>
         <%= sortedVotes[i].voteName %>
       </h3>
-      <div id="<%= sortedVotes[i]._id %>">
-        <%= presentTime > sortedVotes[i].expireTime ? "만료" : "진행중"%>
+      <div id='<%= sortedVotes[i]._id %>'>
+        <%= presentTime > sortedVotes[i].expireTime ? '만료' : '진행중'%>
       </div>
-      <div id="<%= sortedVotes[i]._id %>">
+      <div id='<%= sortedVotes[i]._id %>'>
         생성자: <%= sortedVotes[i].voteCreator.username %>
       </div>
-      <div id="<%= sortedVotes[i]._id %>">
+      <div id='<%= sortedVotes[i]._id %>'>
         <%= sortedVotes[i].expireTime %>까지
       </div>
     </div>

@@ -1,34 +1,34 @@
-<div id="login-container">
-  <div class="login-item-image">
-    <img src="images/loginImage.jpeg" alt="loginImage"/>
+<div id='login-container'>
+  <div class='login-item-image'>
+    <img src='images/loginImage.jpeg' alt='loginImage'/>
   </div>
-  <div class="login-flash-wrapper">
+  <div class='login-flash-wrapper'>
     <% if (error) { %>
-      <span class="alert-flash"><%= error %> </span><br>
+      <span class='alert-flash'><%= error %> </span><br>
     <% } %>
     <% if (message) { %>
-      <span class="success-flash"><%= message %> </span><br>
+      <span class='success-flash'><%= message %> </span><br>
     <% } %>
   </div>
-  <div class="login-form-wrapper">
-    <form action="/login" method="post" class="login-form">
-      <div class="input-wrapper">
+  <div class='login-form-wrapper'>
+    <form action='/login' method='post' class='login-form'>
+      <div class='input-wrapper'>
         <div>
-          <input class="login-item-input email" type="email" name="email" placeholder="Email" required />
+          <input class='login-item-input email' type='email' name='email' placeholder='Email' required />
         </div>
         <div>
-          <input class="login-item-input password" type="password" name="password" placeholder="Password" required minlength="8" />
+          <input class='login-item-input password' type='password' name='password' placeholder='Password' required minlength='8' />
         </div>
       </div>
       <div>
-        <button class="loginbutton" type="submit">Login</button>
+        <button class='loginbutton' type='submit'>Login</button>
       </div>
     </form>
   </div>
-  <div class="login-form-wrapper">
-    <form method="get" class="login-another-button-wrapper">
-      <button class="login-another-button-join" formaction="/signup" type="submit">Join Us</button>
-      <button class="login-another-button" formaction="/" type="submit">Look Around</button>
+  <div class='login-form-wrapper'>
+    <form method='get' class='login-another-button-wrapper'>
+      <button class='login-another-button-join' formaction='/signup' type='submit'>Join Us</button>
+      <button class='login-another-button' formaction='/' type='submit'>Look Around</button>
     </form>
   </div>
 </div>
