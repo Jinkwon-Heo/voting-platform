@@ -1,6 +1,14 @@
 const createError = require('http-errors');
 const { INTERNAL_ERROR } = require('../../constants/errorMessage');
 
+exports.showPlainLoginPage = (req, res, next) => {
+  try {
+    res.render('login', { error: null, message: null} );
+  } catch (error) {
+    next(error);
+  }
+}
+
 exports.showLoginPage = (req, res, next) => {
   try {
     res.render('login', { error: req.flash('error')[0], message: req.flash('successSignup') });

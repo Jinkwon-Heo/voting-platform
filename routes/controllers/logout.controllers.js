@@ -7,7 +7,7 @@ exports.logout = (req, res, next) => {
     req.session.destroy(() => {
       req.session;
     });
-    res.redirect('/login');
+    res.redirect('/login/plain');
   } catch (error) {
     next(createError(500, INTERNAL_ERROR));
   }

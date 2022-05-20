@@ -13,7 +13,17 @@
 </header>
 <div>
   <% if (hasVoted && isVoteOpened) { %>
-   <h1>투표해주셔서 감사합니다. 투표가 종료되면 이메일로 알림이 갑니다.</h1>
+   <h2>투표해주셔서 감사합니다. 투표가 종료되면 이메일로 알림이 갑니다.</h2>
+  <% } %>
+  <% if (loggedInUserEmail === voteData.voteCreator.email) { %>
+    <% for( let i = 0; i < voteData.voteItems.length; i++ ) { %>
+      <div>
+        <p>
+          선택지: <%= voteData.voteItems[i].item %>
+          투표된 횟수: <%= voteData.voteItems[i].voted %>
+        </p>
+      </div>
+    <% } %>
   <% } %>
   <div>
     <% if (isVoteOpened) { %>
