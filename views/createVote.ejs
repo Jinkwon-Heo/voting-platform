@@ -3,8 +3,8 @@
     <header>
       <nav>
         <ul class='createvote-nav-wrapper'>
-          <li><a class='createvote-a' href='/'>Vote list</a></li>
-          <li><a class='createvote-a' href='#' onclick="javascript:logoutControl('/logout')">Logout</a></li><br><br>
+          <li><a class='createvote-a' href='/'>🔙 Vote list</a></li>
+          <li><a class='createvote-a' href='#' onclick="javascript:logoutControl('/logout')">👋 Logout</a></li><br><br>
         </ul>
       </nav>
     </header>
@@ -16,7 +16,7 @@
     </div>
     <div>
       <form action='/voting/new' method='post'>
-        <div>
+        <div class="container">
           <h3>
             <label>Title</label>
           </h3>
@@ -38,10 +38,10 @@
           </h3>
           <p class="createvotebutton-wrapper">
             <span>
-              <button class='createvote-button' type='submit'>Create Vote!</button>
+              <button class='createvote-button' type='submit'>✅ Create Vote!</button>
             </span>
             <span>
-              <input class='addinput-button' type='button' value='Add list' onclick='addItem()' />
+              <input class='addinput-button' type='button' value='➕ Add list' onclick='addItem()' />
             </span>
             <div class='input-wrapper'>
               <input class='createvote-item-input' type='text' required name='voteItems' placeholder='Vote item' />

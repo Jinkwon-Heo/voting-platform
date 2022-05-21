@@ -13,6 +13,7 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const createError = require('http-errors');
 const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
 
 const mainPage = require('./routes/mainPage');
 const login = require('./routes/login');
@@ -40,16 +41,21 @@ const sessionStore = new mongoStore({
   collection: 'sessions',
 });
 
-app.use(session({
-  store: sessionStore,
-  secret: process.env.SECRET_KEY,
-  resave: true,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 1800000,
-    httpOnly: true,
-  }
-}));
+app.use(cookieParser(process.env.SECRET_KEY))
+app.use(function(req, res, done) {
+  const isHealthCheck = req.url.indexOf('healthCheck') > -1;
+  console.log(isHealthCheck);
+  session({
+    store: isHealthCheck || sessionStore,
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1800000,
+      secure: false,
+    }
+  })(req, res, done);
+});
 
 app.use(passport.initialize());
 app.use(passport.session());
