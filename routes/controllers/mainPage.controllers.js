@@ -18,14 +18,12 @@ exports.showMainPage = async function(req, res, next) {
 
     if (votedFlash) {
       flashMessage = votedFlash;
-    } else {
+    } else if (createdFlash) {
       flashMessage = createdFlash;
-    }
-
-    if (flashMessage === null) {
+    } else {
       req.session.destroy(() => {
         req.session;
-      });
+      })
     }
 
     res.render('mainPage', {
