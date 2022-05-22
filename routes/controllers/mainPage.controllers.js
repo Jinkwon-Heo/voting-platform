@@ -22,6 +22,10 @@ exports.showMainPage = async function(req, res, next) {
       } else if (createdFlash) {
         flashMessage = createdFlash;
       }
+    } else {
+      req.session.destroy(() => {
+        req.session;
+      });
     }
 
     console.log(req.session);
