@@ -16,16 +16,16 @@ exports.showMainPage = async function(req, res, next) {
     const createdFlash = req.flash('voteCreated')[0];
     let flashMessage = null;
 
-    if (votedFlash) {
-      flashMessage = votedFlash;
-    } else if (createdFlash) {
-      flashMessage = createdFlash;
-    } else {
-      req.session.destroy(() => {
-        req.session;
-      })
+    if (req.session.passport) {
+      if (votedFlash) {
+        flashMessage = votedFlash;
+      } else if (createdFlash) {
+        flashMessage = createdFlash;
+      }
     }
 
+    console.log(req.session);
+    console.log(flashMessage);
     res.render('mainPage', {
       sortedVotes,
       presentTime,
