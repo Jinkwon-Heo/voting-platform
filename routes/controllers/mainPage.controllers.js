@@ -22,6 +22,12 @@ exports.showMainPage = async function(req, res, next) {
       flashMessage = createdFlash;
     }
 
+    if (flashMessage === null) {
+      req.session.destroy(() => {
+        req.session;
+      });
+    }
+
     res.render('mainPage', {
       sortedVotes,
       presentTime,

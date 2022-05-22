@@ -13,7 +13,6 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const createError = require('http-errors');
 const flash = require('connect-flash');
-const cookieParser = require('cookie-parser');
 
 const mainPage = require('./routes/mainPage');
 const login = require('./routes/login');
@@ -42,7 +41,6 @@ const sessionStore = new mongoStore({
   collection: 'sessions',
 });
 
-app.use(cookieParser(process.env.SECRET_KEY))
 app.use(function(req, res, done) {
   const isHealthCheck = req.url.indexOf('healthCheck') > -1;
   session({
