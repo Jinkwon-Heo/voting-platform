@@ -1,7 +1,4 @@
 const itemBox = document.querySelector('.itemBox');
-const voteItemList = document.getElementsByName('voteItem');
-const expireTimeInput = document.getElementById('expireTime');
-const expireMessageSpan = document.getElementById('expireMessageSpan');
 
 const addItem = () => {
   const newVoteInput = document.createElement('p');

@@ -13,7 +13,6 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const createError = require('http-errors');
 const flash = require('connect-flash');
-const cookieParser = require('cookie-parser');
 
 const mainPage = require('./routes/mainPage');
 const login = require('./routes/login');
@@ -32,6 +31,7 @@ app.set('layout extractScripts', true);
 app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, "/public")));
 app.use('/util', express.static(path.join(__dirname, './util')));
+app.use(express.static(path.join(__dirname, './services')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(flash());
@@ -41,10 +41,8 @@ const sessionStore = new mongoStore({
   collection: 'sessions',
 });
 
-app.use(cookieParser(process.env.SECRET_KEY))
 app.use(function(req, res, done) {
   const isHealthCheck = req.url.indexOf('healthCheck') > -1;
-  console.log(isHealthCheck);
   session({
     store: isHealthCheck || sessionStore,
     secret: process.env.SECRET_KEY,

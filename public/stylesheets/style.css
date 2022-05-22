@@ -15,6 +15,10 @@ button {
   font-style: normal;
 }
 
+.invalid {
+  border: red solid 2px;
+}
+
 .alert-flash {
   font-size: 18px;
   animation: warning 1.5s linear infinite;
